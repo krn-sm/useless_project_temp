@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Supreme Leader's Arena</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Creepster&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Welcome to Supreme Leader's Arena</h1>
+      <nav>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#play">Join the Battle</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section id="hero">
+        <img
+          src="img2.png"
+          alt="Supreme Leader Character"
+          class="supreme-leader-character"
+        />
+        <div class="hero-text">
+          <h2>Enter the Supreme Leader's Arena</h2>
+          <p>Will you rise to the challenge, or be lost in the shadows?</p>
+        </div>
+        <section id="play">
+          <h2>Join the Battle</h2>
+          <button onclick="startGame()">Start Your Journey</button>
+        </section>
+        <div class="dialogue-container" id="dialogue-container">
+          <div class="dialogue-box" id="dialogue-box"></div>
+          <button
+            class="continue-button"
+            id="continue-button"
+            onclick="goToFirstRound()"
+          >
+            Let's Start
+          </button>
+        </div>
+      </section>
+
+      <section id="about">
+        <h2>About the Game</h2>
+        <h3>
+          Step into the shadows and test your skills in the Supreme Leader's
+          Arena! Only the strongest will survive as the Supreme Leader selects
+          the worthy from the unworthy. Are you ready to compete for glory?
+        </h3>
+      </section>
+
+      <section id="contact">
+        <h2>Contact Supreme Leader?</h2>
+        <h3>
+          Don't even think of contacting with the SUPREME LEADER without his
+          consent
+        </h3>
+      </section>
+
+      <section id="stories" class="story-container">
+        <h2>If you disobey the Supreme Leader, No one can help you</h2>
+        <h3 class="rating">You will be under the Supreme surveillance</h3>
+      </section>
+    </main>
+
+    <script>
+      function startGame() {
+        const dialogueContainer = document.getElementById("dialogue-container");
+        const dialogueBox = document.getElementById("dialogue-box");
+        const continueButton = document.getElementById("continue-button");
+
+        dialogueContainer.style.display = "block";
+        dialogueBox.innerText = "What is your name?";
+
+        const inputField = document.createElement("input");
+        inputField.setAttribute("type", "text");
+        inputField.setAttribute("placeholder", "...");
+        inputField.style.marginTop = "10px";
+        inputField.style.padding = "5px";
+
+        dialogueContainer.appendChild(inputField);
+
+        inputField.addEventListener("keypress", function (event) {
+          if (event.key === "Enter") {
+            const playerName = inputField.value.trim();
+            inputField.remove();
+
+            if (!playerName) {
+              dialogueBox.innerText =
+                "You failed to provide a name. You are not even eligible for elimination!";
+              return;
+            }
+
+            if (playerName.toLowerCase().includes("supreme leader")) {
+              dialogueBox.innerText =
+                "How dare you trick me!\nCount your days...\nELIMINATED!";
+            } else {
+              if (Math.random() < 0.5) {
+                dialogueBox.innerText = `The Supreme Leader doesn't like the name "${playerName}". You are ELIMINATED.`;
+              } else {
+                dialogueBox.innerText = `Welcome, ${playerName}. The Supreme Leader accepts you... for now.`;
+                continueButton.style.display = "inline-block";
+              }
+            }
+          }
+        });
+      }
+
+      function goToFirstRound() {
+        window.location.href = "firstround.html";
+      }
+    </script>
+  </body>
+</html>
