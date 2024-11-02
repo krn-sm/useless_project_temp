@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Round 4 - Investigation</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      body,
+      p,
+      h3,
+      h4,
+      #game-description,
+      #interrogation-dialogue,
+      #clues-list {
+        text-align: center;
+      }
+
+      #game-description button {
+        display: block;
+        margin: 20px auto;
+        padding: 10px 20px;
+        font-size: 18px;
+        cursor: pointer;
+        background-color: #052904;
+        color: #f7f7f7;
+        border: none;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+      }
+
+      #game-description button:hover {
+        background-color: #ece7e7;
+      }
+
+      #interrogation-area ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      #interrogation-area ul li {
+        margin: 10px 0;
+      }
+
+      #interrogation-area button {
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #052904;
+        color: #ece7e7;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      #interrogation-area button:hover {
+        background-color: #ece7e7;
+      }
+
+      #result-message {
+        font-size: 1.2em;
+        color: #052904;
+        margin-top: 20px;
+        text-align: center;
+      }
+
+      #accused-result {
+        font-size: 1.5em;
+        color: #052904;
+        margin-top: 20px;
+        text-align: center;
+        display: none;
+      }
+
+      #final-quiz {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+      #result-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+      }
+
+      #accused-result {
+        font-size: 1.5em;
+        color: #052904;
+        background-color: #f2f2f2;
+        border: 2px solid #052904;
+        border-radius: 10px;
+        padding: 20px;
+        width: 80%;
+        max-width: 600px;
+        text-align: center;
+        display: none;
+      }
+
+      #final-quiz div {
+        margin: 10px 0;
+      }
+    </style>
+    <script>
+      let suspects = {
+        "Chief of Security": {
+          info: "He seems overly confident, claiming that the security protocols were foolproof, yet his eyes darted nervously when questioned about his alibi.",
+          clues: [
+            "Witnesses reported seeing him arguing with the Supreme Leader earlier that evening.",
+            "His access card was found near the scene of the crime, raising suspicions about his whereabouts.",
+          ],
+          interrogated: false,
+        },
+        "Political Rival": {
+          info: "Known for his ruthless ambition, he had much to gain from the Supreme Leader's downfall. His alibi was shaky, citing a private meeting with unknown associates.",
+          clues: [
+            "A hidden note was discovered in his office, suggesting plans to undermine the Supreme Leader's authority.",
+            "Several guards reported overhearing him speaking harshly about the Supreme Leader just days before the banquet.",
+          ],
+          interrogated: false,
+        },
+        "Personal Assistant": {
+          info: "Her loyalty was unquestionable, but she had expressed concern over the Supreme Leader's mental state in the days leading up to the banquet.",
+          clues: [
+            "She was seen leaving the Supreme Leader’s private chambers shortly before the incident.",
+            "An anonymous message warning about a possible assassination was found on her desk.",
+          ],
+          interrogated: false,
+        },
+        "Loyal General": {
+          info: "With a history of unwavering loyalty, his discontent regarding recent decisions raised eyebrows. Could he have been pushed too far?",
+          clues: [
+            "A secret meeting with disgruntled officers was recorded the night of the banquet.",
+            "He had voiced strong opposition to a recent military strategy proposed by the Supreme Leader.",
+          ],
+          interrogated: false,
+        },
+      };
+
+      function startGame() {
+        document.getElementById("game-description").style.display = "none";
+        document.getElementById("interrogation-area").style.display = "block";
+        document.getElementById("final-quiz").style.display = "none";
+        resetInterrogations();
+        document.getElementById("result-message").textContent = "";
+        document.getElementById("accused-result").style.display = "none";
+      }
+
+      function interrogateSuspect(suspect) {
+        if (suspects[suspect].interrogated) {
+          document.getElementById("result-message").textContent =
+            "You have already interrogated this suspect!";
+          return;
+        }
+        suspects[suspect].interrogated = true;
+
+        const dialogueEntry = `<li><strong>${suspect}</strong>: "${suspects[suspect].info}"</li>`;
+        document.getElementById("interrogation-dialogue").innerHTML +=
+          dialogueEntry;
+
+        suspects[suspect].clues.forEach((clue) => {
+          document.getElementById("clues-list").innerHTML += `<li>${clue}</li>`;
+        });
+
+        document.getElementById(suspect).disabled = true;
+
+        if (Object.values(suspects).every((s) => s.interrogated)) {
+          document.getElementById("final-quiz").style.display = "block";
+          document.getElementById("interrogation-area").style.display = "none";
+          document.getElementById("final-quiz").scrollIntoView();
+        }
+      }
+
+      function identifyCulprit() {
+        const selectedCulprit = document.querySelector(
+          'input[name="culprit"]:checked'
+        );
+        if (!selectedCulprit) {
+          document.getElementById("result-message").textContent =
+            "Please select a suspect to accuse!";
+          return;
+        }
+
+        const correctCulprit = "Political Rival";
+        const isCorrect = selectedCulprit.value === correctCulprit;
+        const accusationResult = isCorrect
+          ? "Congratulations! You have uncovered the truth and secured your place as the new Supreme Leader!"
+          : "Incorrect! The cult goes unstable, leading to chaos as members turn against each other! Your time is up in this world";
+
+        document.getElementById("accused-result").textContent =
+          accusationResult;
+        document.getElementById("accused-result").style.display = "block";
+        if (isCorrect) {
+          setTimeout(() => {
+            window.location.href = "supreme.html";
+          }, 3500);
+        } else {
+          setTimeout(() => {
+            window.location.href = "index.html";
+          }, 3500);
+        }
+      }
+
+      function resetInterrogations() {
+        document.getElementById("interrogation-dialogue").innerHTML = "";
+        document.getElementById("clues-list").innerHTML = "";
+        Object.keys(suspects).forEach((suspect) => {
+          suspects[suspect].interrogated = false;
+          document.getElementById(suspect).disabled = false;
+        });
+      }
+
+      function resetGame() {
+        resetInterrogations();
+        document.getElementById("final-quiz").style.display = "none";
+        document.getElementById("interrogation-area").style.display = "block";
+        document.getElementById("game-description").style.display = "none";
+      }
+    </script>
+  </head>
+  <body>
+    <header>
+      <h1>Investigation: The Death of the Supreme Leader</h1>
+      <h2>Unravel the Mystery of Power</h2>
+    </header>
+
+    <main>
+      <section id="hero">
+        <section id="game-description">
+          <h3>
+            In a moment that will forever alter the course of the regime, the
+            Supreme Leader has died under mysterious circumstances during a
+            grand banquet.
+          </h3>
+          <h3>
+            Every member of the court had something to gain from the Supreme
+            Leader's demise, and your skills as an investigator are about to be
+            put to the ultimate test. Time is of the essence, and you must
+            uncover the truth before the regime's chaos spirals out of control.
+          </h3>
+          <h3>
+            Delve into the dark secrets of the court, interrogate the suspects,
+            and piece together the clues that will reveal the mastermind behind
+            this shocking betrayal.
+          </h3>
+
+          <button onclick="startGame()">Start Investigation</button>
+        </section>
+
+        <section id="interrogation-area" style="display: none">
+          <h3>Interrogate Suspects</h3>
+          <p>Choose a suspect to interrogate and uncover their secrets:</p>
+          <ul>
+            <li>
+              <button
+                id="Chief of Security"
+                onclick="interrogateSuspect('Chief of Security')"
+              >
+                Chief of Security
+              </button>
+            </li>
+            <li>
+              <button
+                id="Political Rival"
+                onclick="interrogateSuspect('Political Rival')"
+              >
+                Political Rival
+              </button>
+            </li>
+            <li>
+              <button
+                id="Personal Assistant"
+                onclick="interrogateSuspect('Personal Assistant')"
+              >
+                Personal Assistant
+              </button>
+            </li>
+            <li>
+              <button
+                id="Loyal General"
+                onclick="interrogateSuspect('Loyal General')"
+              >
+                Loyal General
+              </button>
+            </li>
+          </ul>
+
+          <h4>Interrogation Dialogue</h4>
+          <ul id="interrogation-dialogue"></ul>
+
+          <h4>Clues Discovered</h4>
+          <ul id="clues-list"></ul>
+
+          <div id="result-message"></div>
+        </section>
+
+        <section id="final-quiz" style="display: none">
+          <h3>Final Investigation</h3>
+          <p>
+            Based on your interrogations, who do you believe is the true
+            culprit?
+          </p>
+          <div>
+            <input type="radio" name="culprit" value="Chief of Security" />
+            Chief of Security<br />
+            <input type="radio" name="culprit" value="Political Rival" />
+            Political Rival<br />
+            <input type="radio" name="culprit" value="Personal Assistant" />
+            Personal Assistant<br />
+            <input type="radio" name="culprit" value="Loyal General" /> Loyal
+            General<br />
+          </div>
+          <button onclick="identifyCulprit()">Accuse Culprit</button>
+        </section>
+
+        <div id="result-container">
+          <div id="accused-result"></div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
