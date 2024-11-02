@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Round 1 - Supreme Leader's Arena</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Round 1</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section id="hero">
+        <center>
+          <h2>Supreme Leader:</h2>
+          <h3>This is your first test</h3>
+          <h3>
+            A player in our cult has rebelled against my rules. Should we
+            eliminate him or not?
+          </h3>
+          <button onclick="makeChoice(1)">Eliminate</button>
+          <button onclick="makeChoice(2)">Spare him</button>
+          <button onclick="makeChoice(3)">Ignore his mistake</button>
+          <div id="result" style="margin-top: 20px; font-size: 1.5rem"></div>
+        </center>
+      </section>
+    </main>
+
+    <script>
+      function makeChoice(result) {
+        const resultDiv = document.getElementById("result");
+        if (result == 1) {
+          resultDiv.innerText =
+            "You have impressed the Supreme Leader! Moving to the next round...";
+
+          setTimeout(() => {
+            window.location.href = "secondround.html";
+          }, 1500);
+        } else if (result == 2) {
+          resultDiv.innerText =
+            "You have been eliminated by the Supreme Leader";
+          setTimeout(() => {
+            window.location.href = "index.html";
+          }, 2000);
+        } else {
+          resultDiv.innerText =
+            "You have been imprisoned by the Supreme Leader";
+
+          setTimeout(() => {
+            window.location.href = "elimination.html";
+          }, 2000);
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Round 2 - Memory Challenge</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      body {
+        font-family: "papyrus";
+        color: #f7fbf6;
+        background-color: #121212;
+        text-align: center;
+      }
+
+      #memory-challenge {
+        padding: 20px;
+      }
+
+      .memory-sequence {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+      }
+
+      .memory-sequence div {
+        width: 50px;
+        height: 50px;
+        margin: 5px;
+        opacity: 0;
+        transition: opacity 0.5s;
+      }
+
+      .memory-sequence div.show {
+        opacity: 1;
+      }
+
+      #memory-feedback {
+        margin-top: 20px;
+        font-size: 1.2rem;
+      }
+
+      #recall-section {
+        display: none;
+        margin-top: 20px;
+      }
+
+      #user-input {
+        padding: 10px;
+        font-size: 16px;
+        width: 300px;
+      }
+
+      #submit-input {
+        padding: 10px 15px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 10px;
+      }
+
+      #colorblind-btn {
+        padding: 10px 15px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 10px;
+        margin-left: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Round 2</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Best for you</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section id="hero">
+        <section id="memory-challenge">
+          <div id="memory-sequence" class="memory-sequence"></div>
+          <button
+            id="recall-btn"
+            onclick="showRecallSection()"
+            style="display: none"
+          >
+            Recall Sequence
+          </button>
+          <div id="recall-section">
+            <h2>
+              Enter the sequence of colors (comma-separated, e.g.,
+              red,blue,green):
+            </h2>
+            <input type="text" id="user-input" />
+            <button id="submit-input" onclick="recallSequence()">Submit</button>
+            <button id="colorblind-btn" onclick="colorblindOption()">
+              I am colorblind
+            </button>
+          </div>
+          <div id="memory-feedback" style="display: none"></div>
+        </section>
+        <script>
+          const colors = ["red", "blue", "green", "yellow", "orange", "purple"];
+          let sequence = [];
+          let playerSequence = [];
+
+          function startMemoryChallenge() {
+            generateSequence();
+            displaySequence();
+          }
+
+          function generateSequence() {
+            sequence = [];
+            for (let i = 0; i < 3; i++) {
+              const randomColor =
+                colors[Math.floor(Math.random() * colors.length)];
+              sequence.push(randomColor);
+            }
+          }
+
+          function displaySequence() {
+            const memoryDiv = document.getElementById("memory-sequence");
+            memoryDiv.innerHTML = "";
+            sequence.forEach((color) => {
+              const colorDiv = document.createElement("div");
+              colorDiv.style.backgroundColor = color;
+              memoryDiv.appendChild(colorDiv);
+            });
+
+            let index = 0;
+            const interval = setInterval(() => {
+              memoryDiv.children[index].classList.add("show");
+              index++;
+              if (index === memoryDiv.children.length) {
+                clearInterval(interval);
+                setTimeout(() => {
+                  hideSequence();
+                  document.getElementById("recall-btn").style.display =
+                    "inline";
+                }, 1000);
+              }
+            }, 500);
+          }
+
+          function hideSequence() {
+            const memoryDiv = document.getElementById("memory-sequence");
+            Array.from(memoryDiv.children).forEach((div) => {
+              div.classList.remove("show");
+            });
+          }
+
+          function showRecallSection() {
+            document.getElementById("recall-section").style.display = "block";
+          }
+
+          function recallSequence() {
+            playerSequence = [];
+            const userInput = document.getElementById("user-input").value;
+            playerSequence = userInput.split(",").map((color) => color.trim());
+
+            const feedbackDiv = document.getElementById("memory-feedback");
+            if (JSON.stringify(playerSequence) === JSON.stringify(sequence)) {
+              feedbackDiv.innerText =
+                "Correct! You remembered the sequence. Supreme leader hates those who are perfect. GO TO JAIL.";
+              setTimeout(() => {
+                window.location.href = "elimination.html";
+              }, 3500);
+            } else {
+              feedbackDiv.innerText =
+                "Incorrect! You have been eliminated by the Supreme Leader.";
+              setTimeout(() => {
+                window.location.href = "index.html";
+              }, 3000);
+            }
+            feedbackDiv.style.display = "block";
+          }
+
+          function colorblindOption() {
+            const feedbackDiv = document.getElementById("memory-feedback");
+            feedbackDiv.innerText =
+              "Supreme Leader is also not partial and does not differntiate colours.\n Proceed to the Third round";
+            feedbackDiv.style.display = "block";
+            setTimeout(() => {
+              window.location.href = "thirdRound.html";
+            }, 3000);
+          }
+
+          window.onload = startMemoryChallenge;
+        </script>
+      </section>
+    </main>
+  </body>
+</html>
