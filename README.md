@@ -30,7 +30,7 @@ Supreme Leader : This Revolutionary Game😈
 For Software:
 
 - HTML,CSS,JAVASCRIPT
-- Netlify-deploymnt platform
+- Netlify-deployment platform
 
 ### Implementation
 
@@ -75,7 +75,7 @@ The end of the game
 
 # Video
 
-[Add your demo video link here]
+[[Add your demo video link here](https://drive.google.com/drive/folders/1NkAZh9hd0hNenTRmYLVopXHGJtPEfcK9?usp=sharing)]
 _Explain what the video demonstrates_
 
 ## Team Contributions
