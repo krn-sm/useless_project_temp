@@ -75,8 +75,7 @@ The end of the game
 
 # Video
 
-[[Add your demo video link here](https://drive.google.com/drive/folders/1NkAZh9hd0hNenTRmYLVopXHGJtPEfcK9?usp=sharing)]
-_Explain what the video demonstrates_
+[[Supreme Leader](https://drive.google.com/drive/folders/1NkAZh9hd0hNenTRmYLVopXHGJtPEfcK9?usp=sharing)]
 
 ## Team Contributions
 
