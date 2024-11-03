@@ -29,10 +29,8 @@ Supreme Leader : This Revolutionary Game😈
 
 For Software:
 
-- [Languages used:HTML,CSS,JAVASCRIPT]
-- [Frameworks used]
-- [Libraries used]
-- [Tools used]
+- HTML,CSS,JAVASCRIPT
+- Netlify-deploymnt platform
 
 ### Implementation
 
