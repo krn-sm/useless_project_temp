@@ -40,11 +40,11 @@ For Software:
 
 # Installation
 
-[commands]
+install netlify cli
 
 # Run
 
-[commands]
+netlify deploy
 
 ### Project Documentation
 
@@ -56,7 +56,7 @@ For Software:
 This shows the homepage of our gaming website 
 
 ![Screenshot2](Round1.png)
-The given screenshots shows the game and look of the first
+The given screenshots shows the game and look of the first round
 
 ![Screenshot3](Round2.png)
 This shows details about the second round
@@ -71,7 +71,7 @@ The given round is about the prison break round
 The final round in the game
 
 ![Screenshot7 ](endpage.png)
-The end of the game with some gun sounds for showing who is powerful in this game
+The end of the game
 
 
 # Diagrams
