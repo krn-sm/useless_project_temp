@@ -29,10 +29,8 @@ Supreme Leader : This Revolutionary Game😈
 
 For Software:
 
-- [Languages used]
-- [Frameworks used]
-- [Libraries used]
-- [Tools used]
+- HTML,CSS,JAVASCRIPT
+- Netlify - deployment platform
 
 ### Implementation
 
@@ -52,40 +50,26 @@ For Software:
 
 # Screenshots (Add at least 3)
 
-![Screenshot1](Add screenshot 1 here with proper name)
-_Add caption explaining what this shows_
+![Screenshot1](homepage.jpg.png)
+This shows the homepage of our gaming website 
 
-![Screenshot2](Add screenshot 2 here with proper name)
-_Add caption explaining what this shows_
+![Screenshot2](Round1.png)
+The given screenshots shows the game and look of the first round
 
-![Screenshot3](Add screenshot 3 here with proper name)
-_Add caption explaining what this shows_
+![Screenshot3](Round2.png)
+This shows details about the second round
 
-# Diagrams
+![Screenshot4](supreme's_interaction.png)
+This is the 3rd round or the supreme leader's interaction with players 
 
-![Workflow](Add your workflow/architecture diagram here)
-_Add caption explaining your workflow_
+![Screenshot5](supreme's_prison.png)
+The given round is about the prison break round
 
-For Hardware:
+![Screenshot6](lastround.png)
+The final round in the game
 
-# Schematic & Circuit
-
-![Circuit](Add your circuit diagram here)
-_Add caption explaining connections_
-
-![Schematic](Add your schematic diagram here)
-_Add caption explaining the schematic_
-
-# Build Photos
-
-![Components](Add photo of your components here)
-_List out all components shown_
-
-![Build](Add photos of build process here)
-_Explain the build steps_
-
-![Final](Add photo of final product here)
-_Explain the final build_
+![Screenshot7 ](endpage.png)
+The end of the game-Supreme Stage
 
 ### Project Demo
 
