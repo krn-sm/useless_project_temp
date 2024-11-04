@@ -80,7 +80,7 @@ The end of the game
 ## Team Contributions
 
 - AKSHAY S: Provided ideas and contributed heavily in the design area 
-- KIRAN S M: Contributed to the Coding part
+- KIRAN S M: Contributed to the Coding part and also contributed for the basic story plot
 
 ---
 
